@@ -1,3 +1,3 @@
-# memtftpd
+# gotftpd
 
 Go TFTP server
