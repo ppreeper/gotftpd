@@ -25,7 +25,7 @@ TFTP is defined in [RFC 1350](https://tools.ietf.org/html/rfc1350)
 
 ### Example
 
-We want to server a firmware image for a router to update from. The file is called `newfirmware.bin` and we are storing it in our `firmware` folder. Our computer and user has the permissions to run on privileged ports (<1024).
+We want to serve a firmware image for a router to update from. The file is called `newfirmware.bin` and we are storing it in our `firmware` folder. Our computer and user has the permissions to run on privileged ports (<1024).
 
 Change directory to where the file is stored.
 
