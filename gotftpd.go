@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/pin/tftp"
+	"github.com/pin/tftp/v3"
 )
 
 var (
@@ -23,7 +23,7 @@ func init() {
 }
 
 func main() {
-	//use nil in place of handler to disable read and write operations
+	// use nil in place of handler to disable read and write operations
 	s := tftp.NewServer(readHandler, writeHandler)
 	s.SetTimeout(5 * time.Second) // optional
 	err := s.ListenAndServe(addr) // blocks until s.Shutdown() is called
@@ -35,7 +35,6 @@ func main() {
 
 // readHandler is called when client starts file download from server
 func readHandler(filename string, rf io.ReaderFrom) error {
-
 	file, err := os.Open(filepath.Join(path, filename))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
@@ -47,7 +46,7 @@ func readHandler(filename string, rf io.ReaderFrom) error {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		return err
 	}
-	//Set transfer size before calling ReadFrom
+	// Set transfer size before calling ReadFrom
 	rf.(tftp.OutgoingTransfer).SetSize(fi.Size())
 
 	n, err := rf.ReadFrom(file)
@@ -61,7 +60,7 @@ func readHandler(filename string, rf io.ReaderFrom) error {
 
 // writeHandler is called when client starts file upload to server
 func writeHandler(filename string, wt io.WriterTo) error {
-	file, err := os.OpenFile(filepath.Join(path, filename), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	file, err := os.OpenFile(filepath.Join(path, filename), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o644)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		return err
