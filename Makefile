@@ -6,9 +6,6 @@ build:
 test:
 	go test -cover -race -v
 
-win32: clean
-	env GOOS=windows GOARCH=386 go build -a -o gotftpd32.exe gotftpd.go
-
 win64: clean
 	env GOOS=windows GOARCH=amd64 go build -a -o gotftpd.exe gotftpd.go
 
